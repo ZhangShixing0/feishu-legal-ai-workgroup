@@ -1,0 +1,67 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.feishu.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# JavaScript and browser tooling
+node_modules/
+playwright-report/
+test-results/
+
+# Runtime state and generated output
+outputs/*
+!outputs/.gitkeep
+work/
+tmp/
+feishu_workgroup/data/
+*.log
+*.db
+*.db-*
+*.sqlite3
+*.sqlite3-*
+*.journal
+
+# Case materials and exported documents (never commit client data)
+*.zip
+*.xlsx
+*.xls
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.wps
+*.dat
+*.gz
+*.docx
+
+# Versioned, sanitized project assets
+!templates/source/*.docx
+!docs/assets/*.png
+!docs/assets/*.jpg
+!docs/assets/*.jpeg
+
+# Local deployment state
+**/deploy/*status*.json
+
+# Internal migration notes may contain historical case references
+案件材料提取填表工具/修改记录.md
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.bak
+*.tmp

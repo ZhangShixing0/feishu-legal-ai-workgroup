@@ -1,0 +1,765 @@
+{
+  "template_id": "financial-loan-highlighted-v2",
+  "template_name": "金融借款合同纠纷民事起诉状（完整案件信息版）",
+  "source": "templates/source/financial-loan-highlighted-template.docx",
+  "paste_aliases": {
+    "序号": "case_sequence",
+    "状态": "case_status",
+    "客户编号": "customer_number",
+    "贷款合同编号": "contract_number",
+    "合同编号": "contract_number",
+    "贷款账号": "loan_account",
+    "未偿本金余额": "principal",
+    "尚欠本金": "principal",
+    "欠款本金": "principal",
+    "本金": "principal",
+    "未偿利息余额": "interest",
+    "欠款利息": "interest",
+    "利息": "interest",
+    "合计": "total_amount",
+    "标的总额": "total_amount",
+    "借款人姓名": "defendant_name",
+    "被告姓名": "defendant_name",
+    "被告名称": "defendant_name",
+    "姓名": "defendant_name",
+    "借款人出生日期": "defendant_birth_date",
+    "被告出生日期": "defendant_birth_date",
+    "出生年月日": "defendant_birth_date",
+    "出生年月": "defendant_birth_date",
+    "出生日期": "defendant_birth_date",
+    "借款人年龄": "defendant_age",
+    "被告年龄": "defendant_age",
+    "借款人教育程度": "defendant_education",
+    "被告教育程度": "defendant_education",
+    "职业": "defendant_occupation",
+    "发放贷款时借款人所在单位性质": "employment_unit_nature",
+    "发放贷款时被告所在单位性质": "employment_unit_nature",
+    "借款人年收入": "defendant_annual_income",
+    "被告年收入": "defendant_annual_income",
+    "婚姻状态": "marital_status",
+    "性别": "defendant_gender",
+    "借款合同约定送达地址": "service_address",
+    "借款人身份证号码": "defendant_id_number",
+    "被告身份证号码": "defendant_id_number",
+    "身份证件号码": "defendant_id_number",
+    "公民身份号码": "defendant_id_number",
+    "身份证号码": "defendant_id_number",
+    "身份证号": "defendant_id_number",
+    "证件号码": "defendant_id_number",
+    "证件号": "defendant_id_number",
+    "借款人身份证所在省": "defendant_id_province",
+    "被告身份证所在省": "defendant_id_province",
+    "借款人身份证所在市": "defendant_id_city",
+    "被告身份证所在市": "defendant_id_city",
+    "借款人身份证地址": "defendant_address",
+    "被告身份证地址": "defendant_address",
+    "住址地（户籍所在地）": "defendant_address",
+    "住址地(户籍所在地)": "defendant_address",
+    "住所地（户籍所在地）": "defendant_address",
+    "住所地(户籍所在地)": "defendant_address",
+    "住所地": "defendant_address",
+    "户籍所在地": "defendant_address",
+    "户籍地址": "defendant_address",
+    "借款人手机号": "defendant_phone",
+    "被告手机号": "defendant_phone",
+    "联系电话": "defendant_phone",
+    "联系方式": "defendant_phone",
+    "手机号码": "defendant_phone",
+    "手机号": "defendant_phone",
+    "电话": "defendant_phone",
+    "民族": "defendant_ethnicity",
+    "工作单位": "defendant_employer",
+    "任职单位": "defendant_employer",
+    "职务": "defendant_title",
+    "一级分行": "primary_branch",
+    "二级分行": "secondary_branch",
+    "经办行": "handling_branch",
+    "分行所在省份": "branch_province",
+    "分行所在城市": "branch_city",
+    "产品类别": "product_category",
+    "贷款种类": "loan_type",
+    "担保方式": "guarantee_method",
+    "还款来源": "repayment_source",
+    "还款方式": "repayment_method",
+    "授信额度（元）": "credit_limit",
+    "授信额度(元)": "credit_limit",
+    "授信额度": "credit_limit",
+    "贷款金额": "loan_amount",
+    "币种": "currency",
+    "线上线下": "channel",
+    "截至基准日执行利率": "effective_interest_rate",
+    "贷款利率类型": "interest_rate_type",
+    "贷款合同期限（月）": "contract_term_months",
+    "贷款合同期限(月)": "contract_term_months",
+    "贷款剩余期数": "remaining_periods",
+    "贷款发放日": "loan_disbursement_date",
+    "贷款到期日": "loan_maturity_date",
+    "贷款投向行业": "loan_industry",
+    "基准日逾期天数": "overdue_days",
+    "基准日进入不良的天数": "npl_days_at_baseline",
+    "最后一次还款时间": "last_repayment_date",
+    "最后一次还款金额": "last_repayment_amount",
+    "未偿费用": "outstanding_fees",
+    "基准日五级分类": "five_level_classification",
+    "是否本行员工": "is_bank_employee",
+    "最后一次不良的时间": "last_npl_date",
+    "进入不良时未偿本金余额": "npl_entry_principal",
+    "进入不良时未偿利息余额": "npl_entry_interest",
+    "进入不良时未偿费用余额": "npl_entry_fees",
+    "进入不良至基准日累计已偿还本金金额": "principal_repaid_since_npl",
+    "是否委外催收": "outsourced_collection",
+    "委外催收机构": "collection_agency",
+    "是否起诉": "is_litigated",
+    "该笔贷款目前所处法律程序阶段": "legal_procedure_stage",
+    "是否涉刑": "is_criminal_case",
+    "客户经理": "relationship_manager",
+    "贷款发放机构全称": "lending_org_full",
+    "贷款发放机构简称": "lending_org_short",
+    "贷款发放机构统一社会信用代码": "lending_org_uscc",
+    "贷款发放机构地区": "lending_org_region",
+    "贷款发放机构所属总行的统一社会信用代码": "head_office_uscc",
+    "共同债务人": "co_party",
+    "共同签约人": "co_party",
+    "合同签订日期": "contract_sign_date",
+    "合同签订时间": "contract_sign_date",
+    "签订日期": "contract_sign_date",
+    "签订时间": "contract_sign_date",
+    "原告名称": "plaintiff_name",
+    "原告": "plaintiff_name",
+    "债权转让前债权人": "original_creditor",
+    "原债权人": "original_creditor",
+    "欠款计算截止日": "balance_date",
+    "欠款计算截止日期": "balance_date",
+    "计算截止日期": "balance_date",
+    "截止日期": "balance_date",
+    "复利": "compound_interest",
+    "罚息": "penalty_interest",
+    "违约金": "penalty_interest",
+    "计算方式": "calculation_method",
+    "合同名称": "contract_name",
+    "贷款人": "loan_lender",
+    "贷款方": "loan_lender",
+    "借款人": "loan_borrower",
+    "借款方": "loan_borrower",
+    "约定借款金额": "agreed_amount",
+    "借款金额": "agreed_amount",
+    "合同金额": "agreed_amount",
+    "约定金额": "agreed_amount",
+    "实际发放金额": "disbursed_amount",
+    "实际放款金额": "disbursed_amount",
+    "放款金额": "disbursed_amount",
+    "实际放款": "disbursed_amount",
+    "证件类型": null,
+    "证件种类": null,
+    "邮政编码": null,
+    "邮编": null,
+    "备注": null
+  },
+  "groups": [
+    {
+      "id": "case_index",
+      "title": "案件与账户索引",
+      "description": "案件状态、客户编号、合同号和贷款账号",
+      "fields": [
+        {
+          "id": "case_sequence",
+          "label": "序号",
+          "type": "number"
+        },
+        {
+          "id": "case_status",
+          "label": "状态",
+          "type": "text"
+        },
+        {
+          "id": "customer_number",
+          "label": "客户编号",
+          "type": "text"
+        },
+        {
+          "id": "contract_number",
+          "label": "贷款合同编号",
+          "type": "text",
+          "required": true,
+          "wide": true
+        },
+        {
+          "id": "loan_account",
+          "label": "贷款账号",
+          "type": "text",
+          "wide": true
+        }
+      ]
+    },
+    {
+      "id": "borrower",
+      "title": "被告（借款人）信息",
+      "description": "身份、联系方式、职业和送达地址",
+      "fields": [
+        {
+          "id": "defendant_name",
+          "label": "被告/借款人姓名",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "defendant_gender",
+          "label": "性别",
+          "type": "select",
+          "options": [
+            "",
+            "男",
+            "女",
+            "不详"
+          ]
+        },
+        {
+          "id": "defendant_birth_date",
+          "label": "出生日期",
+          "type": "date"
+        },
+        {
+          "id": "defendant_age",
+          "label": "年龄",
+          "type": "number"
+        },
+        {
+          "id": "defendant_education",
+          "label": "教育程度",
+          "type": "text"
+        },
+        {
+          "id": "marital_status",
+          "label": "婚姻状态",
+          "type": "text"
+        },
+        {
+          "id": "defendant_occupation",
+          "label": "职业",
+          "type": "text"
+        },
+        {
+          "id": "employment_unit_nature",
+          "label": "发放贷款时所在单位性质",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "defendant_annual_income",
+          "label": "年收入",
+          "type": "money"
+        },
+        {
+          "id": "defendant_phone",
+          "label": "手机号",
+          "type": "tel"
+        },
+        {
+          "id": "service_address",
+          "label": "借款合同约定送达地址",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "defendant_id_number",
+          "label": "身份证号码",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "defendant_id_province",
+          "label": "身份证所在省",
+          "type": "text"
+        },
+        {
+          "id": "defendant_id_city",
+          "label": "身份证所在市",
+          "type": "text"
+        },
+        {
+          "id": "defendant_address",
+          "label": "身份证地址/户籍所在地",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "defendant_ethnicity",
+          "label": "民族（起诉状补充）",
+          "type": "text"
+        },
+        {
+          "id": "defendant_employer",
+          "label": "工作单位（起诉状补充）",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "defendant_title",
+          "label": "职务（起诉状补充）",
+          "type": "text",
+          "helper": "粘贴职业时自动带入，仍可手工修改"
+        }
+      ]
+    },
+    {
+      "id": "loan_contract",
+      "title": "贷款合同信息",
+      "description": "产品、期限、利率、发放和还款安排",
+      "fields": [
+        {
+          "id": "product_category",
+          "label": "产品类别",
+          "type": "text"
+        },
+        {
+          "id": "loan_type",
+          "label": "贷款种类",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "guarantee_method",
+          "label": "担保方式",
+          "type": "text"
+        },
+        {
+          "id": "repayment_source",
+          "label": "还款来源",
+          "type": "text"
+        },
+        {
+          "id": "repayment_method",
+          "label": "还款方式",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "credit_limit",
+          "label": "授信额度（元）",
+          "type": "money"
+        },
+        {
+          "id": "loan_amount",
+          "label": "贷款金额（元）",
+          "type": "money"
+        },
+        {
+          "id": "currency",
+          "label": "币种",
+          "type": "text"
+        },
+        {
+          "id": "channel",
+          "label": "线上线下",
+          "type": "text"
+        },
+        {
+          "id": "effective_interest_rate",
+          "label": "截至基准日执行利率（%）",
+          "type": "number"
+        },
+        {
+          "id": "interest_rate_type",
+          "label": "贷款利率类型",
+          "type": "text"
+        },
+        {
+          "id": "contract_term_months",
+          "label": "贷款合同期限（月）",
+          "type": "number"
+        },
+        {
+          "id": "remaining_periods",
+          "label": "贷款剩余期数",
+          "type": "number"
+        },
+        {
+          "id": "loan_disbursement_date",
+          "label": "贷款发放日",
+          "type": "date"
+        },
+        {
+          "id": "loan_maturity_date",
+          "label": "贷款到期日",
+          "type": "date"
+        },
+        {
+          "id": "loan_industry",
+          "label": "贷款投向行业",
+          "type": "text",
+          "wide": true
+        }
+      ]
+    },
+    {
+      "id": "balance_risk",
+      "title": "余额、逾期与风险分类",
+      "description": "基准日余额、还款、不良和五级分类",
+      "fields": [
+        {
+          "id": "principal",
+          "label": "未偿本金余额（元）",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "interest",
+          "label": "未偿利息余额（元）",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "outstanding_fees",
+          "label": "未偿费用（元）",
+          "type": "money"
+        },
+        {
+          "id": "total_amount",
+          "label": "合计/标的总额（元）",
+          "type": "money",
+          "required": true
+        },
+        {
+          "id": "overdue_days",
+          "label": "基准日逾期天数",
+          "type": "number"
+        },
+        {
+          "id": "npl_days_at_baseline",
+          "label": "基准日进入不良的天数",
+          "type": "number"
+        },
+        {
+          "id": "last_repayment_date",
+          "label": "最后一次还款时间",
+          "type": "date"
+        },
+        {
+          "id": "last_repayment_amount",
+          "label": "最后一次还款金额（元）",
+          "type": "money"
+        },
+        {
+          "id": "five_level_classification",
+          "label": "基准日五级分类",
+          "type": "text"
+        },
+        {
+          "id": "is_bank_employee",
+          "label": "是否本行员工",
+          "type": "text"
+        },
+        {
+          "id": "last_npl_date",
+          "label": "最后一次不良的时间",
+          "type": "date"
+        },
+        {
+          "id": "npl_entry_principal",
+          "label": "进入不良时未偿本金余额（元）",
+          "type": "money"
+        },
+        {
+          "id": "npl_entry_interest",
+          "label": "进入不良时未偿利息余额（元）",
+          "type": "money"
+        },
+        {
+          "id": "npl_entry_fees",
+          "label": "进入不良时未偿费用余额（元）",
+          "type": "money"
+        },
+        {
+          "id": "principal_repaid_since_npl",
+          "label": "进入不良至基准日累计已偿还本金（元）",
+          "type": "money",
+          "wide": true
+        }
+      ]
+    },
+    {
+      "id": "collection_litigation",
+      "title": "催收与法律程序",
+      "description": "委外催收、起诉、涉刑和客户经理",
+      "fields": [
+        {
+          "id": "outsourced_collection",
+          "label": "是否委外催收",
+          "type": "text"
+        },
+        {
+          "id": "collection_agency",
+          "label": "委外催收机构",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "is_litigated",
+          "label": "是否起诉",
+          "type": "text"
+        },
+        {
+          "id": "legal_procedure_stage",
+          "label": "目前所处法律程序阶段",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "is_criminal_case",
+          "label": "是否涉刑",
+          "type": "text"
+        },
+        {
+          "id": "relationship_manager",
+          "label": "客户经理",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "id": "institution",
+      "title": "分行与贷款发放机构",
+      "description": "分支机构层级、地区和统一社会信用代码",
+      "fields": [
+        {
+          "id": "primary_branch",
+          "label": "一级分行",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "secondary_branch",
+          "label": "二级分行",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "handling_branch",
+          "label": "经办行",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "branch_province",
+          "label": "分行所在省份",
+          "type": "text"
+        },
+        {
+          "id": "branch_city",
+          "label": "分行所在城市",
+          "type": "text"
+        },
+        {
+          "id": "lending_org_full",
+          "label": "贷款发放机构全称",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "lending_org_short",
+          "label": "贷款发放机构简称",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "lending_org_uscc",
+          "label": "贷款发放机构统一社会信用代码",
+          "type": "text",
+          "wide": true
+        },
+        {
+          "id": "lending_org_region",
+          "label": "贷款发放机构地区",
+          "type": "text"
+        },
+        {
+          "id": "head_office_uscc",
+          "label": "所属总行统一社会信用代码",
+          "type": "text",
+          "wide": true
+        }
+      ]
+    },
+    {
+      "id": "complaint_supplement",
+      "title": "起诉状专用补充信息",
+      "description": "Excel未必提供；生成前请重点核对带星号项目",
+      "fields": [
+        {
+          "id": "co_party",
+          "label": "共同签约人/共同债务人",
+          "type": "text"
+        },
+        {
+          "id": "contract_sign_date",
+          "label": "合同签订日期",
+          "type": "date",
+          "required": true,
+          "helper": "粘贴贷款发放日时自动带入，需核对是否与签约日一致"
+        },
+        {
+          "id": "plaintiff_name",
+          "label": "原告名称",
+          "type": "text",
+          "required": true,
+          "wide": true,
+          "helper": "Excel没有此列，必须按本案债权受让主体核对"
+        },
+        {
+          "id": "original_creditor",
+          "label": "债权转让前债权人",
+          "type": "text",
+          "required": true,
+          "wide": true,
+          "helper": "默认从贷款发放机构全称带入"
+        },
+        {
+          "id": "balance_date",
+          "label": "欠款计算截止日/基准日",
+          "type": "date",
+          "required": true
+        },
+        {
+          "id": "compound_interest",
+          "label": "复利（元）",
+          "type": "money"
+        },
+        {
+          "id": "penalty_interest",
+          "label": "罚息/违约金（元）",
+          "type": "money"
+        },
+        {
+          "id": "calculation_method",
+          "label": "计算方式",
+          "type": "text",
+          "required": true,
+          "wide": true,
+          "helper": "执行利率会自动生成基础说明，罚息规则仍需人工核对"
+        },
+        {
+          "id": "contract_name",
+          "label": "合同名称",
+          "type": "text",
+          "required": true,
+          "wide": true
+        },
+        {
+          "id": "loan_lender",
+          "label": "贷款人",
+          "type": "text",
+          "required": true,
+          "wide": true,
+          "helper": "默认从贷款发放机构全称带入"
+        },
+        {
+          "id": "loan_borrower",
+          "label": "借款人",
+          "type": "text",
+          "required": true,
+          "wide": true,
+          "helper": "默认从被告/借款人姓名带入"
+        },
+        {
+          "id": "agreed_amount",
+          "label": "约定借款金额（元）",
+          "type": "money",
+          "required": true,
+          "helper": "默认从贷款金额带入"
+        },
+        {
+          "id": "disbursed_amount",
+          "label": "实际发放金额（元）",
+          "type": "money",
+          "required": true,
+          "helper": "默认从贷款金额带入"
+        }
+      ]
+    }
+  ],
+  "defaults": {
+    "case_sequence": "328",
+    "case_status": "可下户",
+    "customer_number": "DEMO-CUSTOMER-001",
+    "contract_number": "DEMO00000000000001",
+    "loan_account": "00000000000000000000000001",
+    "defendant_name": "测试乙",
+    "defendant_gender": "男",
+    "defendant_birth_date": "1990-01-01",
+    "defendant_age": "35",
+    "defendant_education": "本科",
+    "marital_status": "已婚",
+    "defendant_occupation": "职员",
+    "employment_unit_nature": "民营企业",
+    "defendant_annual_income": "120000.00",
+    "defendant_phone": "19900000001",
+    "service_address": "湖北省武汉市示例区测试路1号",
+    "defendant_id_number": "000000199001010018",
+    "defendant_id_province": "示例省",
+    "defendant_id_city": "示例市",
+    "defendant_address": "湖北省武汉市示例区测试路1号",
+    "defendant_ethnicity": "",
+    "defendant_employer": "",
+    "defendant_title": "民营企业",
+    "product_category": "个人消费类",
+    "loan_type": "0217 - 建易贷（一次性还本付息）",
+    "guarantee_method": "信用",
+    "repayment_source": "",
+    "repayment_method": "一次性还本付息",
+    "credit_limit": "270900.0",
+    "loan_amount": "270900.0",
+    "currency": "CNY-人民币",
+    "channel": "线下",
+    "effective_interest_rate": "3.600000",
+    "interest_rate_type": "",
+    "contract_term_months": "12",
+    "remaining_periods": "1",
+    "loan_disbursement_date": "2023-07-26",
+    "loan_maturity_date": "2024-07-26",
+    "loan_industry": "",
+    "principal": "266608",
+    "interest": "13953.03",
+    "outstanding_fees": "0",
+    "total_amount": "280561.03",
+    "overdue_days": "190",
+    "npl_days_at_baseline": "98",
+    "last_repayment_date": "2025-01-24",
+    "last_repayment_amount": "3392.0",
+    "five_level_classification": "可疑二级",
+    "is_bank_employee": "否",
+    "last_npl_date": "2024-10-25",
+    "npl_entry_principal": "270000.0",
+    "npl_entry_interest": "9780.65",
+    "npl_entry_fees": "0.0",
+    "principal_repaid_since_npl": "3392.0",
+    "outsourced_collection": "否",
+    "collection_agency": "",
+    "is_litigated": "否",
+    "legal_procedure_stage": "",
+    "is_criminal_case": "否",
+    "relationship_manager": "测试经理",
+    "primary_branch": "示例省分行",
+    "secondary_branch": "示例银行示例市分行",
+    "handling_branch": "示例银行示例市分行",
+    "branch_province": "示例省",
+    "branch_city": "示例市",
+    "lending_org_full": "示例银行股份有限公司示例支行",
+    "lending_org_short": "示例银行示例支行",
+    "lending_org_uscc": "DEMO-USCC-00000001",
+    "lending_org_region": "示例省",
+    "head_office_uscc": "DEMO-USCC-00000002",
+    "co_party": "",
+    "contract_sign_date": "2023-07-26",
+    "plaintiff_name": "示例资产管理有限公司",
+    "original_creditor": "示例银行股份有限公司示例支行",
+    "balance_date": "2025-01-31",
+    "compound_interest": "0.00",
+    "penalty_interest": "0.00",
+    "calculation_method": "利息年化3.6%",
+    "contract_name": "中国建设银行个人消费借款合同",
+    "loan_lender": "示例银行股份有限公司示例支行",
+    "loan_borrower": "测试乙",
+    "agreed_amount": "270900.0",
+    "disbursed_amount": "270900.0"
+  }
+}

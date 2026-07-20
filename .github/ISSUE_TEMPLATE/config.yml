@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安全问题（不要公开提交）
+    url: https://github.com/ZhangShixing0
+    about: 请通过仓库所有者的私密渠道报告凭证、个人信息或访问控制问题。

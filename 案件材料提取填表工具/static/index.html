@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>案件材料提取填表工具</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <div class="brand" aria-label="案件材料提取填表工具">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h5M10 12h5M10 16h5"/></svg>
+      </span>
+      <span>
+        <strong>案件材料提取填表工具</strong>
+        <small>私有部署 · 证据材料整理</small>
+      </span>
+    </div>
+    <div class="privacy-badge">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3"/><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M12 14v3"/></svg>
+      不发送给第三方
+    </div>
+  </header>
+
+  <main id="main" class="page-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">ZIP → Excel</p>
+      <h1 id="page-title">把案件材料整理成可核对的 Excel</h1>
+      <p>自动读取 PDF、Word、图片和材料路径。没有可靠信息的字段填“无”并标黄，下载前可逐项修改。</p>
+    </section>
+
+    <section class="workspace-card" aria-labelledby="upload-title">
+      <div class="section-heading">
+        <div>
+          <span class="section-number">01</span>
+          <h2 id="upload-title">选择文件</h2>
+        </div>
+        <p>原文件不会被覆盖，工具只生成结果副本。</p>
+      </div>
+
+      <form id="uploadForm" novalidate>
+        <div class="upload-grid">
+          <label class="drop-zone" id="archiveZone" for="archiveInput">
+            <input id="archiveInput" name="archive" type="file" accept=".zip,application/zip" required>
+            <span class="upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 14v5h14v-5"/></svg>
+            </span>
+            <span class="upload-copy">
+              <strong>案件材料 ZIP</strong>
+              <small id="archiveHint">点击选择或拖入压缩包</small>
+            </span>
+            <span class="file-state" id="archiveState">未选择</span>
+          </label>
+
+          <label class="drop-zone" id="workbookZone" for="workbookInput">
+            <input id="workbookInput" name="workbook" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required>
+            <span class="upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M5 3h14v18H5zM5 9h14M10 9v12M5 15h14"/></svg>
+            </span>
+            <span class="upload-copy">
+              <strong>案件信息 XLSX</strong>
+              <small id="workbookHint">保留原表格式并定位同案行</small>
+            </span>
+            <span class="file-state" id="workbookState">未选择</span>
+          </label>
+        </div>
+
+        <div id="formError" class="form-error" role="alert" hidden></div>
+        <div class="action-row">
+          <p class="support-note">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></svg>
+            扫描页越多，离线 OCR 用时越长；任务会在后台处理并显示真实进度。
+          </p>
+          <button id="analyzeButton" class="primary-button" type="submit">
+            <span>开始提取</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M14 7l5 5-5 5"/></svg>
+          </button>
+        </div>
+      </form>
+
+      <div id="progressPanel" class="progress-panel" aria-live="polite" aria-atomic="true" hidden>
+        <div class="progress-header">
+          <span class="spinner" aria-hidden="true"></span>
+          <div>
+            <strong id="progressTitle">正在检查文件</strong>
+            <small id="progressDetail">材料只在当前运行环境的内存和任务目录中处理</small>
+          </div>
+          <strong id="progressPercent" class="progress-percent">0%</strong>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="材料提取进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progressBar"></span></div>
+        <ol class="progress-steps">
+          <li class="active">任务与解压</li>
+          <li>文本与 OCR</li>
+          <li>字段匹配</li>
+          <li>等待核对</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="resultsSection" class="results-section" aria-labelledby="results-title" hidden>
+      <div class="section-heading results-heading">
+        <div>
+          <span class="section-number">02</span>
+          <h2 id="results-title">核对提取结果</h2>
+        </div>
+        <p>黄色缺失项会写入“无”；“Excel保留”表示材料未验证该值，导出时仍保留原单元格内容。</p>
+      </div>
+
+      <div class="summary-grid" aria-label="提取结果概览">
+        <article class="summary-card"><small>已识别</small><strong id="foundCount">0</strong><span>个字段</span></article>
+        <article class="summary-card warning"><small>缺失标黄</small><strong id="missingCount">0</strong><span>个字段</span></article>
+        <article class="summary-card review"><small>建议核对</small><strong id="reviewCount">0</strong><span>个字段</span></article>
+        <article class="summary-card"><small>实际可解析</small><strong id="fileCount">0</strong><span id="fileCountLabel">个来源</span></article>
+      </div>
+
+      <div id="warningPanel" class="warning-panel" hidden>
+        <div class="warning-title">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 2.8 20h18.4z"/><path d="M12 9v5M12 17h.01"/></svg>
+          <strong>处理提示</strong>
+        </div>
+        <ul id="warningList"></ul>
+      </div>
+
+      <div class="table-toolbar">
+        <label class="search-box" for="fieldSearch">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+          <input id="fieldSearch" type="search" placeholder="搜索字段或来源">
+        </label>
+        <div class="filter-group" aria-label="筛选字段">
+          <button class="filter-button active" type="button" data-filter="all">全部</button>
+          <button class="filter-button" type="button" data-filter="missing">仅缺失</button>
+          <button class="filter-button" type="button" data-filter="review">需核对</button>
+          <button class="filter-button" type="button" data-filter="preserved">Excel保留</button>
+        </div>
+      </div>
+
+      <div class="field-table-wrap">
+        <table class="field-table">
+          <thead><tr><th scope="col">列</th><th scope="col">Excel 字段</th><th scope="col">提取值（可修改）</th><th scope="col">状态</th><th scope="col">信息来源</th></tr></thead>
+          <tbody id="fieldTableBody"></tbody>
+        </table>
+        <div id="emptyFilter" class="empty-filter" hidden>没有符合当前筛选条件的字段。</div>
+      </div>
+
+      <div class="export-bar">
+        <div>
+          <strong>核对完成后生成结果副本</strong>
+          <small id="targetHint">相同贷款账号或序号会更新同案行，否则新增一行。</small>
+        </div>
+        <button id="exportButton" class="primary-button" type="button">
+          <span>生成并下载 Excel</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 19h14"/></svg>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <footer>案件信息属于敏感数据，请在受控电脑上使用，并在完成核对后妥善保管结果文件。</footer>
+  <script src="app.js" defer></script>
+</body>
+</html>

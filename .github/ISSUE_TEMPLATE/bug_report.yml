@@ -1,0 +1,57 @@
+name: 缺陷报告
+description: 报告可复现的功能、生成或部署问题；禁止附带真实案件数据。
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请只使用匿名化或虚构数据复现，删除日志中的凭证、令牌、姓名和证件信息。
+  - type: dropdown
+    id: component
+    attributes:
+      label: 影响组件
+      options:
+        - 律书生成台
+        - 案件材料提取器
+        - 飞书工作群编排
+        - 部署 / CI
+        - 文档
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 说明预期行为和实际行为。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 最小复现步骤
+      placeholder: |
+        1. 使用虚构示例……
+        2. 点击……
+        3. 出现……
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境
+      description: 操作系统、Python/Node 版本、运行模式和相关提交。
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 已脱敏日志
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 数据确认
+      options:
+        - label: 我确认本 Issue 不含真实案件材料、个人信息、App Secret 或访问令牌。
+          required: true

@@ -1,0 +1,39 @@
+[Unit]
+Description=Case Material Extractor
+After=network.target
+
+[Service]
+Type=simple
+User=materialextractor
+Group=materialextractor
+WorkingDirectory=/opt/material-extractor
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONUTF8=1
+Environment=CASE_EXTRACTOR_PORT=8777
+Environment=CASE_EXTRACTOR_STRICT_PORT=1
+Environment=CASE_EXTRACTOR_NO_BROWSER=1
+Environment=CASE_EXTRACTOR_OCR_BACKEND=tesseract
+Environment=CASE_EXTRACTOR_TESSERACT_LANG=chi_sim+eng
+Environment=CASE_EXTRACTOR_OCR_MAX_PAGES=30
+Environment=CASE_EXTRACTOR_MAX_UPLOAD_MB=200
+ExecStart=/usr/bin/python3 /opt/material-extractor/server.py
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectHostname=true
+ReadWritePaths=/opt/material-extractor/outputs
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+LockPersonality=true
+MemoryMax=1500M
+
+[Install]
+WantedBy=multi-user.target

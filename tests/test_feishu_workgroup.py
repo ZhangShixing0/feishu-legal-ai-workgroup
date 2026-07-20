@@ -14,7 +14,7 @@ from feishu_workgroup.web import render_form, render_success
 def sample_extraction_result() -> dict:
     values = {
         "贷款合同编号": "HT-2026-001",
-        "借款人姓名": "张三",
+        "借款人姓名": "测试甲",
         "未偿本金余额": "100000.00",
         "未偿利息余额": "3600.00",
         "合计": "103600.00",
@@ -22,7 +22,7 @@ def sample_extraction_result() -> dict:
         "贷款发放日": "2025-01-01",
         "贷款到期日": "2026-01-01",
         "截至基准日执行利率": "3.6",
-        "贷款发放机构全称": "某银行股份有限公司某支行",
+        "贷款发放机构全称": "示例银行股份有限公司测试支行",
     }
     return {
         "fields": [
@@ -143,11 +143,11 @@ class ConfigTests(unittest.TestCase):
 class MappingTests(unittest.TestCase):
     def test_extraction_mapping_fills_equivalent_complaint_fields(self) -> None:
         fields = extraction_to_generator_fields(sample_extraction_result())
-        self.assertEqual(fields["defendant_name"], "张三")
-        self.assertEqual(fields["loan_borrower"], "张三")
+        self.assertEqual(fields["defendant_name"], "测试甲")
+        self.assertEqual(fields["loan_borrower"], "测试甲")
         self.assertEqual(fields["contract_sign_date"], "2025-01-01")
-        self.assertEqual(fields["loan_lender"], "某银行股份有限公司某支行")
-        self.assertEqual(fields["original_creditor"], "某银行股份有限公司某支行")
+        self.assertEqual(fields["loan_lender"], "示例银行股份有限公司测试支行")
+        self.assertEqual(fields["original_creditor"], "示例银行股份有限公司测试支行")
         self.assertIn("plaintiff_name", missing_required_fields(fields))
         self.assertIn("balance_date", missing_required_fields(fields))
 
@@ -310,7 +310,7 @@ class OrchestratorFlowTests(unittest.TestCase):
                 case.id,
                 case.access_token,
                 {
-                    "plaintiff_name": "某资产管理有限公司",
+                    "plaintiff_name": "示例资产管理（测试）有限公司",
                     "balance_date": "2026-07-16",
                     "contract_name": "个人借款合同",
                 },
@@ -318,7 +318,7 @@ class OrchestratorFlowTests(unittest.TestCase):
             self.assertEqual(generated.status, "done")
             self.assertTrue(Path(generated.docx_path).is_file())
             self.assertEqual(len(draft_bot.files), 1)
-            self.assertEqual(generator.fields["plaintiff_name"], "某资产管理有限公司")
+            self.assertEqual(generator.fields["plaintiff_name"], "示例资产管理（测试）有限公司")
 
 
 if __name__ == "__main__":

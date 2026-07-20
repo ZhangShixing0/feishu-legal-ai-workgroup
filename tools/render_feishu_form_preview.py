@@ -26,7 +26,7 @@ def main() -> None:
             {"header": "截至基准日执行利率", "value": "3.6", "missing": False},
             {
                 "header": "贷款发放机构全称",
-                "value": "某银行股份有限公司某支行",
+                "value": "示例银行股份有限公司测试支行",
                 "missing": False,
             },
         ]

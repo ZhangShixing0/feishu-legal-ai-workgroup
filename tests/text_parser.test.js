@@ -5,46 +5,46 @@ const { parsePastedText } = require("../static/text-parser.js");
 const schema = require("../templates/financial_loan/field_schema.json");
 const parse = (text) => parsePastedText(text, schema.paste_aliases);
 
-const screenshotText = `姓名：张三          性别：男  出生日期：2000.02.05      民族： 工作单位：宝鸡市
-职务：无     联系电话：19900000004    住址地（户籍所在地）：宝鸡市          证件类型：
+const screenshotText = `姓名：测试甲          性别：男  出生日期：2000.02.05      民族： 工作单位：示例科技（测试）有限公司
+职务：无     联系电话：19900000004    住址地（户籍所在地）：示例省示例市示例区测试路1号          证件类型：
 身份证件号码：000000000000000000002`;
 
 assert.deepEqual(parse(screenshotText), {
-  defendant_name: "张三",
+  defendant_name: "测试甲",
   defendant_gender: "男",
   defendant_birth_date: "2000-02-05",
   defendant_ethnicity: "",
-  defendant_employer: "宝鸡市",
+  defendant_employer: "示例科技（测试）有限公司",
   defendant_title: "无",
   defendant_phone: "19900000004",
-  defendant_address: "宝鸡市",
+  defendant_address: "示例省示例市示例区测试路1号",
   defendant_id_number: "000000000000000000002",
-  loan_borrower: "张三",
+  loan_borrower: "测试甲",
 });
 
-const gluedLabelText = "姓名：张三                          性别：男出生日期：2000.01.01         民族：汉 工作单位：宝鸡                          职务：无          联系电话：130945515        住所地（户籍所在地）：团结村                             证件类型：身份证证件号码：000000199004260012";
+const gluedLabelText = "姓名：测试甲                          性别：男出生日期：2000.01.01         民族：汉 工作单位：示例科技（测试）有限公司                          职务：无          联系电话：130945515        住所地（户籍所在地）：示例省示例市示例区测试路1号                             证件类型：身份证证件号码：000000199004260012";
 
 assert.deepEqual(parse(gluedLabelText), {
-  defendant_name: "张三",
+  defendant_name: "测试甲",
   defendant_gender: "男",
   defendant_birth_date: "2000-01-01",
   defendant_ethnicity: "汉",
-  defendant_employer: "宝鸡",
+  defendant_employer: "示例科技（测试）有限公司",
   defendant_title: "无",
   defendant_phone: "130945515",
-  defendant_address: "团结村",
+  defendant_address: "示例省示例市示例区测试路1号",
   defendant_id_number: "000000199004260012",
-  loan_borrower: "张三",
+  loan_borrower: "测试甲",
 });
 
 assert.deepEqual(
-  parse("被告姓名 张三 性别 男 联系电话 199 0000 0004 身份证号 0000 0020 0002"),
+  parse("被告姓名 测试甲 性别 男 联系电话 199 0000 0004 身份证号 0000 0020 0002"),
   {
-    defendant_name: "张三",
+    defendant_name: "测试甲",
     defendant_gender: "男",
     defendant_phone: "19900000004",
     defendant_id_number: "000000200002",
-    loan_borrower: "张三",
+    loan_borrower: "测试甲",
   },
 );
 
@@ -57,7 +57,7 @@ assert.deepEqual(
   },
 );
 
-const fullCaseText = fs.readFileSync(path.join(__dirname, "..", "examples", "full_case_328.txt"), "utf8");
+const fullCaseText = fs.readFileSync(path.join(__dirname, "..", "examples", "full_case_demo.txt"), "utf8");
 const fullCase = parse(fullCaseText);
 assert.ok(Object.keys(fullCase).length >= 70, `only parsed ${Object.keys(fullCase).length} fields`);
 assert.deepEqual({
@@ -113,11 +113,11 @@ assert.deepEqual({
   defendant_education: "本科",
   employment_unit_nature: "民营企业",
   defendant_annual_income: "120000.00",
-  service_address: "湖北省武汉市示例区测试路1号",
+  service_address: "示例省示例市示例区测试路1号",
   defendant_id_number: "000000199004260012",
-  defendant_address: "湖北省武汉市示例区测试路1号",
+  defendant_address: "示例省示例市示例区测试路1号",
   defendant_phone: "19900000004",
-  loan_type: "0217 - 建易贷（一次性还本付息）",
+  loan_type: "DEMO-LOAN - 示例贷（一次性还本付息）",
   repayment_source: "",
   repayment_method: "一次性还本付息",
   loan_amount: "270900.0",

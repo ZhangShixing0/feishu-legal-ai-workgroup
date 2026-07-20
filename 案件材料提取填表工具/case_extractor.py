@@ -60,6 +60,13 @@ PROVINCES = [
     "香港特别行政区", "澳门特别行政区",
 ]
 
+# 仓库内只保留虚构机构名称。正式环境如需规范化真实机构简称，请仅在未提交的
+# 本地环境变量中设置这两个值，避免客户或合作机构名称进入版本库。
+BANK_FULL_NAME = os.environ.get("MATERIAL_BANK_FULL_NAME", "示例银行股份有限公司").strip()
+BANK_SHORT_NAME = os.environ.get("MATERIAL_BANK_SHORT_NAME", "示例银行").strip()
+LOAN_PRODUCT_KEYWORD = os.environ.get("MATERIAL_LOAN_PRODUCT_KEYWORD", "示例贷").strip()
+LOAN_PRODUCT_CODE = os.environ.get("MATERIAL_LOAN_PRODUCT_CODE", "DEMO-LOAN").strip()
+
 
 @dataclass
 class SourceDocument:
@@ -752,12 +759,12 @@ def analyze_fields(
             short_name = lender_match.group(1).strip("，,。；;")
             if "支行" in short_name or "分行" in short_name:
                 full_name = short_name
-                if short_name.startswith("中国建设银行股份有限公司"):
-                    short_name = "建行" + short_name.removeprefix("中国建设银行股份有限公司")
-                elif short_name.startswith("中国建设银行"):
-                    short_name = "建行" + short_name.removeprefix("中国建设银行")
-                elif short_name.startswith("建行"):
-                    full_name = "中国建设银行股份有限公司" + short_name[2:]
+                if BANK_FULL_NAME and short_name.startswith(BANK_FULL_NAME):
+                    suffix = short_name.removeprefix(BANK_FULL_NAME)
+                    short_name = f"{BANK_SHORT_NAME}{suffix}" if BANK_SHORT_NAME else short_name
+                elif BANK_SHORT_NAME and short_name.startswith(BANK_SHORT_NAME):
+                    suffix = short_name.removeprefix(BANK_SHORT_NAME)
+                    full_name = f"{BANK_FULL_NAME}{suffix}" if BANK_FULL_NAME else full_name
                 set_field("经办行", short_name, doc.path, 0.97, doc.method)
                 set_field("贷款发放机构简称", short_name, doc.path, 0.97, doc.method)
                 set_field("贷款发放机构全称", full_name, doc.path, 0.88, "机构简称规范化，需人工核对")
@@ -869,13 +876,26 @@ def analyze_fields(
         if head_code_match:
             set_field("贷款发放机构所属总行的统一社会信用代码", head_code_match.group(1), doc.path, 0.96, "材料明确字段")
 
-    if "个人消费" in all_compact or "建易贷" in all_compact:
-        source = next((doc for doc in preferred if "个人消费" in compact(doc.text) or "建易贷" in compact(doc.text)), None)
+    if "个人消费" in all_compact or (LOAN_PRODUCT_KEYWORD and LOAN_PRODUCT_KEYWORD in all_compact):
+        source = next(
+            (
+                doc
+                for doc in preferred
+                if "个人消费" in compact(doc.text)
+                or (LOAN_PRODUCT_KEYWORD and LOAN_PRODUCT_KEYWORD in compact(doc.text))
+            ),
+            None,
+        )
         if source:
             set_field("产品类别", "个人消费类", source.path, 0.9, source.method)
-    if "建易贷" in all_compact:
-        source = next(doc for doc in preferred if "建易贷" in compact(doc.text))
-        product = "0217 - 建易贷（一次性还本付息）" if "0217" in all_compact else "建易贷（一次性还本付息）"
+    if LOAN_PRODUCT_KEYWORD and LOAN_PRODUCT_KEYWORD in all_compact:
+        source = next(doc for doc in preferred if LOAN_PRODUCT_KEYWORD in compact(doc.text))
+        product_name = f"{LOAN_PRODUCT_KEYWORD}（一次性还本付息）"
+        product = (
+            f"{LOAN_PRODUCT_CODE} - {product_name}"
+            if LOAN_PRODUCT_CODE and LOAN_PRODUCT_CODE in all_compact
+            else product_name
+        )
         set_field("贷款种类", product, source.path, 0.93, source.method)
 
     if re.search(r"担保材料[^\n\\/]*[—\-_（）()]*无", all_paths):
@@ -908,7 +928,11 @@ def analyze_fields(
     address_result = fields.get("借款合同约定送达地址") or fields.get("借款人身份证地址")
     institution_result = fields.get("贷款发放机构简称")
     if institution_result:
-        institution_text = re.sub(r"^(?:中国建设银行股份有限公司|中国建设银行|建行)", "", str(institution_result.value))
+        institution_text = str(institution_result.value)
+        for bank_prefix in (BANK_FULL_NAME, BANK_SHORT_NAME):
+            if bank_prefix and institution_text.startswith(bank_prefix):
+                institution_text = institution_text.removeprefix(bank_prefix)
+                break
         match = re.search(r"([\u4e00-\u9fff]{2,6}?市)", institution_text)
         if match:
             city = match.group(1)

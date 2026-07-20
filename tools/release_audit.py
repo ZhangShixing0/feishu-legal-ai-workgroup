@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import re
 import subprocess
 import zipfile
@@ -14,6 +15,22 @@ TEXT_SUFFIXES = {
 }
 RUNTIME_PREFIXES = ("tmp/", "outputs/", "work/", "feishu_workgroup/data/")
 CASE_SUFFIXES = {".zip", ".xlsx", ".xls", ".pdf", ".jpg", ".jpeg", ".png", ".wps", ".dat"}
+FORBIDDEN_PII_SHA256 = {
+    "f61683ae4b1da523e5df4fbadd7a02fb22d266d2c717cb6552da42d7a1038676",
+    "e0f8aebbf712178d2fb75c45ec01a24d1c457c5a49bed45ff1a5ef320b50a3e7",
+    "1d841bc0ee98309cb7916670b7f0fdef5f4c35150711a41405ef3633b56322cf",
+    "1da1199765ccf6d094c4e0ec9e2c889cabc527515bda82ed1b34c5ea01f3b0e9",
+    "81ef90a748aba007bb6159e012274ef83c1e4e8c348b38298006adde143f77c1",
+    "5bcbe250e9effac0e2768828200b2767e5c494f15101a6c95cee420dc8b3dddc",
+    "8159c9a504fc0b9a7307677d6cde84b36d904646168ec318c7bc3fe8592fb297",
+    "bd5ce34afeca90b72b1e7aa5ef5d894bd7fd3d942cf27189ee0a6d7a29fe67e4",
+    "64424ca1e3ee7248bf5685b8a9d70b52be706b0d00507c6e1e553b613607f7c1",
+}
+TEST_ENTITY_MARKERS = ("测试", "示例", "虚构", "demo")
+ENTITY_FIELDS = (
+    "defendant_name", "loan_borrower", "plaintiff_name", "original_creditor",
+    "loan_lender", "lending_org_full", "defendant_employer", "relationship_manager",
+)
 
 
 def repository_files() -> list[Path]:
@@ -48,8 +65,26 @@ def placeholder(value: str) -> bool:
     )
 
 
+def forbidden_pii_hash_hit(text: str) -> bool:
+    spans = [
+        (span, 2) for span in re.findall(r"[\u4e00-\u9fff·]{2,}", text)
+    ] + [
+        (span, 3) for span in re.findall(r"[A-Za-z0-9_-]{3,}", text)
+    ]
+    for span, minimum in spans:
+        maximum = min(24, len(span))
+        for width in range(minimum, maximum + 1):
+            for start in range(0, len(span) - width + 1):
+                digest = hashlib.sha256(span[start:start + width].encode("utf-8")).hexdigest()
+                if digest in FORBIDDEN_PII_SHA256:
+                    return True
+    return False
+
+
 def inspect_text(path: Path, text: str, problems: list[str]) -> None:
     relative = path.relative_to(ROOT).as_posix()
+    if forbidden_pii_hash_hit(text):
+        problems.append(f"{relative}: 包含禁止发布的真实或含混主体标识（哈希命中）")
     for match in re.finditer(r"(?m)^\s*([A-Z0-9_]*(?:SECRET|TOKEN|PASSWORD))\s*=\s*(.+?)\s*$", text):
         if not placeholder(match.group(2)):
             problems.append(f"{relative}: 疑似真实密钥配置 {match.group(1)}")
@@ -65,6 +100,19 @@ def inspect_text(path: Path, text: str, problems: list[str]) -> None:
     }
     if unsafe_phones:
         problems.append(f"{relative}: 包含未列入测试号段的手机号格式数据")
+    entity_pattern = re.compile(
+        rf"(?:\[['\"](?:{'|'.join(ENTITY_FIELDS)})['\"]\]|\b(?:{'|'.join(ENTITY_FIELDS)})\b)"
+        r"\s*[:=]\s*['\"]([^'\"]*)['\"]",
+        re.I,
+    )
+    for match in entity_pattern.finditer(text):
+        value = match.group(1).strip()
+        if value and not any(marker in value.lower() for marker in TEST_ENTITY_MARKERS):
+            problems.append(f"{relative}: 示例主体字段未明确标注为测试数据：{value}")
+    for match in re.finditer(r"(?:被告姓名|借款人姓名|客户经理)[：:]\s*['\"“]?([\u4e00-\u9fff·]{2,8})", text):
+        value = match.group(1)
+        if not any(marker in value.lower() for marker in TEST_ENTITY_MARKERS):
+            problems.append(f"{relative}: 姓名字段未明确标注为测试数据：{value}")
 
 
 def inspect_docx(path: Path, problems: list[str]) -> None:
@@ -72,9 +120,17 @@ def inspect_docx(path: Path, problems: list[str]) -> None:
     try:
         with zipfile.ZipFile(path) as archive:
             names = set(archive.namelist())
-            document = ET.fromstring(archive.read("word/document.xml"))
-            visible = "".join(node.text or "" for node in document.iter() if node.tag.endswith("}t"))
-            inspect_text(path, visible, problems)
+            for name in names:
+                if not name.lower().endswith((".xml", ".rels")):
+                    continue
+                raw = archive.read(name).decode("utf-8", errors="ignore")
+                inspect_text(path, raw, problems)
+                if name.lower().endswith(".xml"):
+                    root = ET.fromstring(raw)
+                    visible = "".join(node.text or "" for node in root.iter() if node.tag.endswith("}t"))
+                    inspect_text(path, visible, problems)
+            if any(name.startswith(("word/embeddings/", "word/media/")) for name in names):
+                problems.append(f"{relative}: DOCX 包含无法用文本规则审计的嵌入对象或媒体")
             if "docProps/custom.xml" in names:
                 problems.append(f"{relative}: 仍包含 Word 自定义属性")
             if "docProps/core.xml" in names:
@@ -91,6 +147,7 @@ def main() -> int:
     for path in files:
         relative = path.relative_to(ROOT).as_posix()
         lowered = relative.lower()
+        inspect_text(path, relative, problems)
         if lowered.startswith(RUNTIME_PREFIXES) and lowered != "outputs/.gitkeep":
             problems.append(f"{relative}: 运行时目录不应进入版本控制")
             continue

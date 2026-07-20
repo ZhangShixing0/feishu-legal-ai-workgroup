@@ -15,7 +15,7 @@ from xml.etree import ElementTree as ET
 BASE_DIR = Path(__file__).resolve().parent
 SCHEMA_PATH = BASE_DIR / "templates" / "financial_loan" / "field_schema.json"
 REFERENCE_PATH = BASE_DIR / "templates" / "source" / "financial-loan-highlighted-template.docx"
-REFERENCE_SHA256 = "0b4aeec11c89d9142c0c9bb012505fd5a792337d1f49ec1ded8ac6672515f036"
+REFERENCE_SHA256 = "8e89db8343facba7161ab22562593e8ad67aa64f4f856221fc3346561a38d365"
 
 W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 W = f"{{{W_NS}}}"

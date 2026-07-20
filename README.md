@@ -94,7 +94,7 @@ python server.py
 ### 启动完整飞书工作群
 
 1. 将 `.env.feishu.example` 复制为 `.env.feishu`。
-2. 填写两个应用的 App ID、App Secret、对外 HTTPS 地址和允许使用的群 `chat_id`。
+2. 填写两个应用的 App ID、App Secret、对外 HTTPS 地址和允许使用的群 `chat_id`；生产环境如需识别特定机构或产品，再仅在本地填写 `MATERIAL_BANK_*`、`MATERIAL_LOAN_PRODUCT_*`。
 3. 先检查配置，再启动：
 
 ```powershell

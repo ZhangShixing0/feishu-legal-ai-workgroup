@@ -26,6 +26,7 @@
 
 - 不提交 `.env.feishu`、`tmp/`、`outputs/`、`work/`、`feishu_workgroup/data/`。
 - 不在 Issue、PR、CI 日志或截图中使用真实案件材料。
+- 版本化示例只能使用“测试甲/测试乙”、名称含“示例/测试”的虚构机构和产品、无效 `000000` 行政区码身份证号；真实机构及专属产品名称仅允许保存在未提交的 `.env.feishu`。
 - 提交前运行 `python tools/release_audit.py`。
 - 若密钥进入聊天、日志或 Git 历史，应立即轮换；仅删除文件不足以撤销泄露。
 

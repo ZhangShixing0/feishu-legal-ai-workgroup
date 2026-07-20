@@ -1,12 +1,12 @@
 {
-  "defendant_name": "张三",
+  "defendant_name": "测试甲",
   "defendant_gender": "男",
   "defendant_birth_date": "1988-06-15",
   "defendant_ethnicity": "汉族",
-  "defendant_employer": "武汉某科技有限公司",
+  "defendant_employer": "示例科技（测试）有限公司",
   "defendant_title": "项目经理",
   "defendant_phone": "19900000002",
-  "defendant_address": "湖北省武汉市洪山区示例路88号",
+  "defendant_address": "示例省示例市示例区测试路88号",
   "defendant_id_number": "000000199004260012",
   "co_party": "",
   "contract_sign_date": "2023-08-08",
@@ -20,9 +20,9 @@
   "penalty_interest": "19315.73",
   "calculation_method": "利息年化3.6%，罚息浮动50%",
   "total_amount": "280195.73",
-  "contract_name": "中国建设银行个人消费借款合同",
+  "contract_name": "示例银行个人消费借款合同",
   "loan_lender": "示例银行股份有限公司示例支行",
-  "loan_borrower": "张三",
+  "loan_borrower": "测试甲",
   "agreed_amount": "240000.00",
   "disbursed_amount": "240000.00"
 }

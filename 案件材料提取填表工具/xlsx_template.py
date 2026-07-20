@@ -127,7 +127,7 @@ def _coerce_existing_value(header: str, value: str):
 def inspect_workbook_context(input_path: Path, workbook_name: str = "") -> dict:
     """Read existing case rows without changing the workbook.
 
-    The workbook name can identify the intended row (for example, 序号616.xlsx).
+    The workbook name can identify the intended row (for example, 序号900001.xlsx).
     Existing values are later used as transparent fallbacks, never as material OCR.
     """
     with zipfile.ZipFile(input_path) as source:

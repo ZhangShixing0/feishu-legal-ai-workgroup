@@ -28,7 +28,7 @@ async function waitForJson(url, timeout = 15000) {
 }
 
 async function main() {
-  const fullCaseText = fs.readFileSync(path.join(projectRoot, "examples", "full_case_328.txt"), "utf8");
+  const fullCaseText = fs.readFileSync(path.join(projectRoot, "examples", "full_case_demo.txt"), "utf8");
   const server = spawn(python, ["server.py", "--no-browser", "--port", String(port)], {
     cwd: projectRoot,
     windowsHide: true,
@@ -51,7 +51,7 @@ async function main() {
     assert.ok(scroll.scrollHeight > scroll.clientHeight, JSON.stringify(scroll));
     assert.ok(scroll.scrollTop > 0, JSON.stringify(scroll));
 
-    const screenshotText = "姓名：张三                          性别：男出生日期：2000.01.01         民族：汉 工作单位：宝鸡                          职务：无          联系电话：130945515        住所地（户籍所在地）：团结村                             证件类型：身份证证件号码：000000199004260012";
+    const screenshotText = "姓名：测试甲                          性别：男出生日期：2000.01.01         民族：汉 工作单位：示例科技（测试）有限公司                          职务：无          联系电话：130945515        住所地（户籍所在地）：示例省示例市示例区测试路1号                             证件类型：身份证证件号码：000000199004260012";
     const values = await page.evaluate((text) => {
       const paste = document.querySelector("#pasteInput");
       paste.value = text;
@@ -67,14 +67,14 @@ async function main() {
       ]));
     }, screenshotText);
     assert.deepEqual(values, {
-      defendant_name: "张三",
+      defendant_name: "测试甲",
       defendant_gender: "男",
       defendant_birth_date: "2000-01-01",
       defendant_ethnicity: "汉",
-      defendant_employer: "宝鸡",
+      defendant_employer: "示例科技（测试）有限公司",
       defendant_title: "无",
       defendant_phone: "130945515",
-      defendant_address: "团结村",
+      defendant_address: "示例省示例市示例区测试路1号",
       defendant_id_number: "000000199004260012",
     });
 
@@ -115,11 +115,11 @@ async function main() {
       defendant_annual_income: "120000.00",
       marital_status: "已婚",
       defendant_gender: "男",
-      service_address: "湖北省武汉市示例区测试路1号",
+      service_address: "示例省示例市示例区测试路1号",
       defendant_id_number: "000000199004260012",
-      defendant_address: "湖北省武汉市示例区测试路1号",
+      defendant_address: "示例省示例市示例区测试路1号",
       defendant_phone: "19900000004",
-      loan_type: "0217 - 建易贷（一次性还本付息）",
+      loan_type: "DEMO-LOAN - 示例贷（一次性还本付息）",
       repayment_method: "一次性还本付息",
       loan_amount: "270900.0",
       effective_interest_rate: "3.600000",

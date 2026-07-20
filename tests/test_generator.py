@@ -67,8 +67,8 @@ class GeneratorTests(unittest.TestCase):
         self.assertTrue(any("标的总额" in item for item in result.warnings))
 
     def test_role_warning(self) -> None:
-        self.fields["loan_lender"] = "张三"
-        self.fields["loan_borrower"] = "中国建设银行某支行"
+        self.fields["loan_lender"] = "测试甲"
+        self.fields["loan_borrower"] = "示例银行测试支行"
         result = validate(self.fields)
         self.assertTrue(any("可能填反" in item for item in result.warnings))
 

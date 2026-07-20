@@ -107,9 +107,9 @@ class ExtractorTests(unittest.TestCase):
 
     def test_field_rules_cover_contract_and_no_material_paths(self) -> None:
         text = """
-        中国建设银行个人消费借款合同 合同编号：00000000000000000003
+        示例银行个人消费借款合同 合同编号：00000000000000000003
         借款人：测试甲 身份证件名称及号码：居民身份证/000000199004260012
-        住所：湖北省武汉市示例区测试路2号 通讯地址：湖北省武汉市示例区测试路2号
+        住所：示例省示例市示例区测试路2号 通讯地址：示例省示例市示例区测试路2号
         联系电话及传真：19900000003 贷款人：示例银行示例支行
         借款额度为人民币（大写）贰拾肆万元整元。有效期间自2023年08月08日至2024年08月08日。
         采用固定利率方式，利率按照3.6%。本合同项下借款用于综合消费。一次性还本付息。
@@ -120,9 +120,9 @@ class ExtractorTests(unittest.TestCase):
             SourceDocument("5、诉讼情况/13-诉讼、仲裁、执行文件（如有）/诉讼、仲裁、执行文件（无）.txt", "path", "", "材料路径"),
             SourceDocument("2、贷款合同信息/4-担保材料—无/担保材料-无.txt", "path", "", "材料路径"),
         ]
-        fields = analyze_fields(documents, "616-测试甲-00000000000000000000000001.zip")
+        fields = analyze_fields(documents, "900001-测试甲-00000000000000000000000001.zip")
         values = {item["header"]: item["value"] for item in fields}
-        self.assertEqual(values["序号"], 616)
+        self.assertEqual(values["序号"], 900001)
         self.assertEqual(values["贷款账号"], "00000000000000000000000001")
         self.assertEqual(values["借款人身份证号码"], "000000199004260012")
         self.assertEqual(values["贷款金额"], 240000)
@@ -132,20 +132,20 @@ class ExtractorTests(unittest.TestCase):
 
     def test_multi_case_package_selects_excel_target_only(self) -> None:
         documents = [
-            SourceDocument("Word文书/328-测试乙-DEMO00000000000001-民事起诉状.docx", "docx", "测试乙", "Word文本层"),
-            SourceDocument("Word文书/616-测试甲-000000199004260012-民事起诉状.docx", "docx", "测试甲", "Word文本层"),
+            SourceDocument("Word文书/900002-测试乙-DEMO00000000000001-民事起诉状.docx", "docx", "测试乙", "Word文本层"),
+            SourceDocument("Word文书/900001-测试甲-000000199004260012-民事起诉状.docx", "docx", "测试甲", "Word文本层"),
         ]
         selected, case, warnings = select_case_documents(
             documents,
             "批量起诉状.zip",
             {
-                "序号": "616",
+                "序号": "900001",
                 "借款人姓名": "测试甲",
                 "贷款账号": "00000000000000000000000001",
                 "贷款合同编号": "000000199004260012",
             },
         )
-        self.assertEqual(case["sequence"], "616")
+        self.assertEqual(case["sequence"], "900001")
         self.assertEqual(len(selected), 1)
         self.assertIn("测试甲", selected[0].path)
         self.assertTrue(warnings)
@@ -155,7 +155,7 @@ class ExtractorTests(unittest.TestCase):
     def test_complaint_rules_and_reference_year_age(self) -> None:
         text = """
         被告（自然人）姓名：测试甲 性别：男 出生日期：1990-04-26 职务：记者
-        联系电话：19900000003 住所地（户籍所在地）：湖北省武汉市示例区测试路2号
+        联系电话：19900000003 住所地（户籍所在地）：示例省示例市示例区测试路2号
         证件类型：身份证 证件号码：000000199004260012
         贷款人：示例银行股份有限公司示例支行 借款人：测试甲
         借款金额约定：240,000.00元 实际发放：240,000.00元
@@ -164,16 +164,16 @@ class ExtractorTests(unittest.TestCase):
         最后一次还款：0.00元，时间：未提供。基准日已逾期177天。
         进入不良至基准日累计已还本金：0.00元。担保方式：信用。
         """
-        documents = [SourceDocument("616-测试甲-000000199004260012-民事起诉状.docx", "docx", text, "Word文本层")]
+        documents = [SourceDocument("900001-测试甲-000000199004260012-民事起诉状.docx", "docx", text, "Word文本层")]
         fields = analyze_fields(
             documents,
             "批量起诉状.zip",
-            {"sequence": "616", "name": "测试甲", "contract": "000000199004260012"},
+            {"sequence": "900001", "name": "测试甲", "contract": "000000199004260012"},
         )
         values = {item["header"]: item["value"] for item in fields}
         self.assertEqual(values["借款人姓名"], "测试甲")
         self.assertEqual(values["借款人年龄"], 35)
-        self.assertEqual(values["借款合同约定送达地址"], "湖北省武汉市示例区测试路2号")
+        self.assertEqual(values["借款合同约定送达地址"], "示例省示例市示例区测试路2号")
         self.assertEqual(values["未偿本金余额"], 240000)
         self.assertEqual(values["未偿利息余额"], 15312.37)
         self.assertEqual(values["合计"], 255312.37)
@@ -195,7 +195,7 @@ class WorkbookTests(unittest.TestCase):
                 value = "无"
                 missing = True
                 if header == "序号":
-                    value, missing = 616, False
+                    value, missing = 900001, False
                 elif header == "贷款账号":
                     value, missing = "00000000000000000000000001", False
                 elif header == "借款人姓名":
@@ -205,7 +205,7 @@ class WorkbookTests(unittest.TestCase):
             self.assertEqual(result.target_row, 3)
             self.assertFalse(result.matched_existing)
             row = inspect_row(first, 3)
-            self.assertEqual(row[0], "616")
+            self.assertEqual(row[0], "900001")
             self.assertEqual(row[1], "无")
             self.assertEqual(row[3], "00000000000000000000000001")
             with zipfile.ZipFile(first) as archive:

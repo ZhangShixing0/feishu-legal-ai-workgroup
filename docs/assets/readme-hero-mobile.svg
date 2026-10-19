@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640" role="img" aria-labelledby="title desc">
+<title id="title">飞书法律文书多智能体工作群</title><desc id="desc">AI 材料专员与 AI 诉状专员在飞书群内接力，经人工核对与补充确认生成 Word 草稿，再由律师最终审查。</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101d2c"/><stop offset="1" stop-color="#192e43"/></linearGradient></defs>
+<rect width="640" height="640" rx="20" fill="url(#bg)"/>
+<g font-family="Segoe UI, PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<text x="40" y="62" fill="#a7bad1" font-size="18" letter-spacing="2">律书 / LEGAL WORKGROUP</text>
+<text x="40" y="117" fill="#9db2ca" font-size="18">V1 · 律所内部验证版</text>
+<text x="38" y="193" fill="#f7f8fa" font-size="42" font-weight="700">材料整理与诉状起草，</text>
+<text x="38" y="251" fill="#acc7ff" font-size="42" font-weight="700">在同一个群里协作。</text>
+<text x="40" y="306" fill="#becbd9" font-size="21">双 AI 岗位接力，两次人工确认。</text>
+<rect x="40" y="352" width="560" height="76" rx="12" fill="#213953" stroke="#3a587b"/>
+<text x="65" y="398" fill="#e8eef7" font-size="25" font-weight="600">材料专员</text>
+<text x="235" y="398" fill="#b4c7dc" font-size="22">提取材料 → 人工核对</text>
+<path d="M320 428v35" stroke="#d6b277" stroke-width="2"/>
+<path d="m314 457 6 6 6-6" fill="none" stroke="#d6b277" stroke-width="2"/>
+<rect x="40" y="466" width="560" height="76" rx="12" fill="#1c3b3c" stroke="#396160"/>
+<text x="65" y="512" fill="#e6f1ed" font-size="25" font-weight="600">诉状专员</text>
+<text x="235" y="512" fill="#b6d0c7" font-size="22">补充确认 → Word 草稿</text>
+<text x="40" y="600" fill="#a7bad1" font-size="18">金融借款合同纠纷 · 由律师最终审查</text></g></svg>

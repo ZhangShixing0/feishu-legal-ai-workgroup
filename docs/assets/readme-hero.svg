@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+<title id="title">飞书法律文书多智能体工作群</title><desc id="desc">AI 材料专员与 AI 诉状专员在飞书群内接力，经人工核对与补充确认生成 Word 草稿，再由律师最终审查。</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101d2c"/><stop offset="1" stop-color="#192e43"/></linearGradient></defs>
+<rect width="1200" height="520" rx="20" fill="url(#bg)"/>
+<g font-family="Segoe UI, PingFang SC, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+<path d="M730 0V520M930 0V520M1130 0V520" stroke="#b7cbe6" stroke-opacity=".05"/>
+<circle cx="1125" cy="45" r="230" fill="none" stroke="#b7cbe6" stroke-opacity=".08"/>
+<text x="62" y="66" fill="#a7bad1" font-size="16" letter-spacing="3">律书 / LEGAL WORKGROUP</text>
+<rect x="936" y="40" width="202" height="32" rx="16" fill="#253c52"/>
+<circle cx="956" cy="56" r="4" fill="#7db7a7"/>
+<text x="971" y="62" fill="#cbd7e5" font-size="14">V1 · 律所内部验证版</text>
+<text x="60" y="168" fill="#f7f8fa" font-size="48" font-weight="700">材料整理与诉状起草，</text>
+<text x="60" y="236" fill="#acc7ff" font-size="48" font-weight="700">在同一个群里协作。</text>
+<text x="62" y="293" fill="#becbd9" font-size="20">AI 材料专员提取核对，AI 诉状专员接力生成。</text>
+<text x="62" y="327" fill="#becbd9" font-size="20">两次人工确认，让每一步交接都有依据。</text>
+<g transform="translate(797 112)">
+<rect width="340" height="82" rx="12" fill="#213953" stroke="#3a587b"/>
+<rect x="20" y="20" width="42" height="42" rx="10" fill="#385b91"/>
+<text x="41" y="48" text-anchor="middle" fill="white" font-size="22">材</text>
+<text x="80" y="34" fill="#e8eef7" font-size="20" font-weight="600">AI 材料专员</text>
+<text x="80" y="61" fill="#b4c7dc" font-size="16">材料提取 → 字段核对</text>
+<path d="M170 82v24" stroke="#6b859f" stroke-width="2"/>
+<rect x="52" y="106" width="236" height="40" rx="20" fill="#d6b277"/>
+<text x="170" y="132" text-anchor="middle" fill="#253244" font-size="16" font-weight="600">人工确认 · 交接与补充</text>
+<path d="M170 146v24" stroke="#6b859f" stroke-width="2"/>
+<rect y="170" width="340" height="82" rx="12" fill="#1c3b3c" stroke="#396160"/>
+<rect x="20" y="190" width="42" height="42" rx="10" fill="#3a756a"/>
+<text x="41" y="218" text-anchor="middle" fill="white" font-size="22">诉</text>
+<text x="80" y="204" fill="#e6f1ed" font-size="20" font-weight="600">AI 诉状专员</text>
+<text x="80" y="231" fill="#b6d0c7" font-size="16">确认信息 → Word 草稿</text>
+</g>
+<path d="M62 412H1138" stroke="#b7cbe6" stroke-opacity=".2"/>
+<text x="62" y="463" fill="#d9e4ef" font-size="18">双 AI 岗位</text>
+<text x="235" y="463" fill="#71869e" font-size="18">/</text>
+<text x="276" y="463" fill="#d9e4ef" font-size="18">两次人工确认</text>
+<text x="487" y="463" fill="#71869e" font-size="18">/</text>
+<text x="530" y="463" fill="#d9e4ef" font-size="18">律师最终审查</text>
+<text x="1138" y="463" text-anchor="end" fill="#a7bad1" font-size="15">金融借款合同纠纷</text></g></svg>

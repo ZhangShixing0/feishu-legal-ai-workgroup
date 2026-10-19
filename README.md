@@ -24,6 +24,8 @@
 
 **v4.1 · 2 分 49 秒**，从同群协作看到材料核对、字段交接和 Word 草稿回传，再了解背后的三个服务。使用 v4.1 宣传片，保留原有画面、配音与完整时间线。
 
+https://github.com/user-attachments/assets/e7f099f3-2b2a-48c2-b5fd-418a3c57ab95
+
 [观看 / 下载 1080p v4.1 原片](docs/assets/feishu-legal-intro.mp4?raw=true)
 
 <details>

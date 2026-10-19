@@ -22,11 +22,11 @@
 
 ## 项目介绍视频
 
-**v4.1 · 2 分 49 秒**，从同群协作看到材料核对、字段交接和 Word 草稿回传，再了解背后的三个服务。公开展示版已遮挡可读的证件号、账号、手机号和详细地址，保留原有配音与完整时间线。
+**v4.1 · 2 分 49 秒**，从同群协作看到材料核对、字段交接和 Word 草稿回传，再了解背后的三个服务。使用 v4.1 宣传片，保留原有画面、配音与完整时间线。
 
-https://github.com/user-attachments/assets/f9f16727-60b7-4413-89c8-6c105cb81689
+https://github.com/user-attachments/assets/e7f099f3-2b2a-48c2-b5fd-418a3c57ab95
 
-[观看 / 下载 1080p v4.1 完整视频（字段已遮挡）](docs/assets/feishu-legal-intro.mp4?raw=true)
+[观看 / 下载 1080p v4.1 原片](docs/assets/feishu-legal-intro.mp4?raw=true)
 
 <details>
 <summary>视频内容与演示说明</summary>

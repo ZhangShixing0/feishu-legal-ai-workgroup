@@ -2,6 +2,8 @@
 
 # 飞书法律文书多智能体工作群
 
+**[简体中文](README.md)** · [English](README.en.md)
+
 <picture>
   <source media="(max-width: 640px)" srcset="docs/assets/readme-hero-mobile.svg">
   <img src="docs/assets/readme-hero.svg" alt="材料专员与诉状专员在同一飞书群接力，经两次人工确认生成 Word 草稿" width="1200">
